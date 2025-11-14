@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POMODORO PRO — Focus Timer, Tasks & Stats by VProger</title>
+    <meta name="description" content="Pomodoro Pro — современный Pomodoro таймер с задачами, статистикой, конфетти, графиками и персонализацией. Бесплатно. Работает прямо в браузере.">
+    <meta name="keywords" content="pomodoro, помодоро таймер, таймер фокусировки, productivity app, focus timer, задачи, VProger, pomodoro pro">
+    <meta name="author" content="Андрей Викулов (VProger)">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="ru">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://pomidoro.vproger.ru/">
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content="POMODORO PRO — Pomodoro Timer by VProger">
+    <meta property="og:description" content="Фокус, задачи, статистика, конфетти и прогресс — полностью бесплатный Pomodoro таймер.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pomidoro.vproger.ru/">
+    <meta property="og:image" content="assets/og-image.png">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pomodoro Pro — лучший таймер продуктивности">
+    <meta name="twitter:description" content="Элегантный Pomodoro таймер c задачами, графиками и эффектами.">
+    <meta name="twitter:image" content="assets/og-image.png">
+
+    <!-- App Manifest (PWA-friendly) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f1117">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" href="assets/icon.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://kit.fontawesome.com/6e3ef981cb.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105208622', 'ym');
+
+        ym(105208622, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105208622" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+
+<body class="min-h-screen flex flex-col">
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Андрей Викулов",
+        "alternateName": "VProger",
+        "jobTitle": "Full-Stack Developer",
+        "url": "https://vproger.ru",
+        "sameAs": [
+            "https://github.com/va-proger",
+            "https://vk.com/vproger_club",
+            "https://t.me/vproger"
+        ]
+    }
+</script>
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Главная",
+                "item": "https://vproger.github.io/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Pomodoro Pro",
+                "item": "https://vproger.github.io/pomodoro-pro/"
+            }
+        ]
+    }
+</script>
+
+<header class="w-full max-w-4xl mx-auto px-4 pt-5 flex items-center justify-between gap-4">
+    <div>
+        <h1 class="text-xl sm:text-2xl font-semibold tracking-wide text-accent">
+            🍅 Pomodoro Pro
+        </h1>
+        <p class="text-xs sm:text-sm text-muted mt-1">
+            Фокус, задачи, статистика — пет-проект от VProger
+        </p>
+    </div>
+    <button id="themeToggle"
+            class="theme-toggle-btn"
+            type="button">
+        🌙 Тёмная
+    </button>
+</header>
+
+<main class="flex-1 w-full max-w-4xl mx-auto px-4 pb-10 pt-4 flex flex-col gap-8">
+
+    <!-- TIMER SECTION -->
+    <section class="card flex flex-col items-center gap-4 mt-2">
+        <p class="text-xs uppercase tracking-[0.2em] text-muted">
+            Текущая сессия
+        </p>
+
+        <div class="timer-wrapper">
+            <svg class="timer-svg" viewBox="0 0 260 260">
+                <!-- фон -->
+                <circle
+                        cx="130" cy="130" r="110"
+                        stroke="rgba(148,163,184,0.25)"
+                        stroke-width="12"
+                        fill="none"
+                />
+                <!-- прогресс -->
+                <circle
+                        id="progressRing"
+                        cx="130" cy="130" r="110"
+                        stroke="currentColor"
+                        class="timer-ring"
+                        stroke-width="12"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-dasharray="691"
+                        stroke-dashoffset="691"
+                />
+            </svg>
+
+            <div class="timer-center">
+                <div id="timerDisplay" class="timer-time">
+                    25:00
+                </div>
+                <div id="sessionLabel" class="timer-label">
+                    Work · Помидор #1
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-3">
+            <button id="startBtn" class="btn btn-primary" type="button">Start</button>
+            <button id="pauseBtn" class="btn btn-secondary" type="button">Pause</button>
+            <button id="resetBtn" class="btn btn-ghost" type="button">Reset</button>
+        </div>
+
+        <p class="text-xs text-muted mt-1">
+            Режим: <span id="modeLabel" class="font-medium text-accent">Работа</span> ·
+            Цикл: <span id="cycleLabel">1 / 4</span>
+        </p>
+    </section>
+
+    <!-- SETTINGS + TASKS -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- SETTINGS -->
+        <div class="card">
+            <h2 class="section-title">⚙️ Настройки интервалов</h2>
+            <p class="text-xs text-muted mb-3">
+                Время работы и отдыха сохраняется в браузере (localStorage).
+            </p>
+
+            <div class="grid grid-cols-2 gap-3">
+                <label class="field">
+                    <span class="field-label">Work (мин)</span>
+                    <input id="setWork" type="number" min="1" max="180"
+                           class="input" value="25">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Break (мин)</span>
+                    <input id="setBreak" type="number" min="1" max="60"
+                           class="input" value="5">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Long break (мин)</span>
+                    <input id="setLongBreak" type="number" min="1" max="60"
+                           class="input" value="15">
+                </label>
+
+                <label class="field">
+                    <span class="field-label">Циклов до большого</span>
+                    <input id="setCycles" type="number" min="1" max="10"
+                           class="input" value="4">
+                </label>
+            </div>
+
+            <button id="saveSettings" type="button" class="btn btn-primary w-full mt-4">
+                Сохранить настройки
+            </button>
+        </div>
+
+        <!-- TASKS -->
+        <div class="card">
+            <h2 class="section-title">📝 Задачи Pomodoro</h2>
+            <p class="text-xs text-muted mb-3">
+                Первая незавершённая задача автоматически получает +1 помидор после Work-сессии.
+            </p>
+
+            <div class="flex gap-2 mb-3">
+                <input id="taskInput"
+                       type="text"
+                       placeholder="Например: Дописать README для Pomodoro Pro"
+                       class="input flex-1">
+                <button id="addTask" type="button" class="btn btn-primary px-4">
+                    +
+                </button>
+            </div>
+
+            <div id="taskList" class="space-y-2">
+                <!-- задачи рендерятся JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="card">
+        <div class="flex items-center justify-between gap-3 mb-3">
+            <h2 class="section-title">📊 Статистика помидоров</h2>
+            <button id="clearStats" type="button" class="text-xs text-muted hover:text-accent transition">
+                Сбросить статистику
+            </button>
+        </div>
+        <p class="text-xs text-muted mb-3">
+            Считаются только Work-сессии. Каждая завершённая — один помидор.
+        </p>
+        <div class="w-full overflow-x-auto">
+            <canvas id="statsChart" height="160"></canvas>
+        </div>
+    </section>
+
+</main>
+
+<footer class="w-full max-w-4xl mx-auto px-4 pb-6 pt-2 text-center text-xs text-muted">
+    <p>
+        Сделано с ❤️ и немного прокрастинации —
+        <a href="https://vproger.ru" target="_blank" class="text-accent hover:underline">
+            Андрей Викулов (VProger)
+        </a>
+    </p>
+    <p class="mt-1">
+        Код на GitHub:
+        <a href="https://github.com/va-proger" target="_blank" class="hover:underline">
+            @va-proger
+        </a>
+    </p>
+
+</footer>
+<div class="share-widget">
+    <button class="share-btn" id="shareToggle">
+        <i class="fa-solid fa-share-nodes"></i> Поделиться
+    </button>
+
+    <div class="share-panel" id="sharePanel">
+        <a class="sh vk" href="#" data-share="vk"><i class="fa-brands fa-vk"></i></a>
+        <a class="sh tg" href="#" data-share="telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a class="sh wa" href="#" data-share="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a class="sh fb" href="#" data-share="facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a class="sh tw" href="#" data-share="twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a class="sh em" href="#" data-share="email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+</div>
+
+<audio id="ding" src="assets/ding.mp3" preload="auto"></audio>
+
+
+<script type="module" src="./main.js"></script>
+
+</body>
+</html>
