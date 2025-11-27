@@ -5,32 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POMODORO PRO — Focus Timer, Tasks & Stats by VProger</title>
     <meta name="description" content="Pomodoro Pro — современный Pomodoro таймер с задачами, статистикой, конфетти, графиками и персонализацией. Бесплатно. Работает прямо в браузере.">
-    <meta name="keywords" content="pomodoro, помодоро таймер, таймер фокусировки, productivity app, focus timer, задачи, VProger, pomodoro pro">
     <meta name="author" content="Андрей Викулов (VProger)">
     <meta name="robots" content="index, follow">
     <meta name="language" content="ru">
 
-    <!-- Canonical -->
     <link rel="canonical" href="https://pomidoro.vproger.ru/">
 
-    <!-- OpenGraph -->
     <meta property="og:title" content="POMODORO PRO — Pomodoro Timer by VProger">
     <meta property="og:description" content="Фокус, задачи, статистика, конфетти и прогресс — полностью бесплатный Pomodoro таймер.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pomidoro.vproger.ru/">
-    <meta property="og:image" content="assets/og-image.png">
+    <meta property="og:image" content="https://pomidoro.vproger.ru/assets/og-image.png">
     <meta property="og:locale" content="ru_RU">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Pomodoro Pro — лучший таймер продуктивности">
     <meta name="twitter:description" content="Элегантный Pomodoro таймер c задачами, графиками и эффектами.">
-    <meta name="twitter:image" content="assets/og-image.png">
+    <meta name="twitter:image" content="https://pomidoro.vproger.ru/assets/og-image.png">
 
-    <!-- App Manifest (PWA-friendly) -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0f1117">
-
+    <meta property="og:site_name" content="Pomodoro Pro">
+    <meta name="application-name" content="Pomodoro Pro">
+    <meta name="apple-mobile-web-app-title" content="Pomodoro Pro">
     <!-- Icons -->
     <link rel="apple-touch-icon" href="assets/icon.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -40,6 +37,95 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://kit.fontawesome.com/6e3ef981cb.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="assets/icon.png">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Андрей Викулов",
+            "alternateName": "VProger",
+            "jobTitle": "Full-Stack Developer",
+            "url": "https://vproger.ru",
+            "sameAs": [
+                "https://github.com/va-proger",
+                "https://vk.com/vproger_club",
+                "https://t.me/vproger"
+            ]
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Главная",
+                    "item": "https://pomidoro.vproger.ru/"
+                }
+            ]
+        }
+    </script>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Pomodoro Pro",
+            "alternateName": "POMODORO PRO — Focus Timer, Tasks & Stats",
+            "url": "https://pomidoro.vproger.ru/",
+            "description": "Современный Pomodoro таймер с задачами, статистикой, конфетти и локальным хранилищем. Бесплатно, работает прямо в браузере.",
+            "applicationCategory": "ProductivityApplication",
+            "applicationSubCategory": "TimeManagement",
+            "operatingSystem": "Web",
+            "inLanguage": "ru-RU",
+            "image": "https://pomidoro.vproger.ru/assets/og-image.png",
+            "featureList": [
+                "Pomodoro таймер",
+                "Задачи и статистика",
+                "Графики",
+                "Конфетти",
+                "Локальное хранилище",
+                "PWA режим"
+            ],
+            "author": {
+                "@type": "Person",
+                "name": "Андрей Викулов",
+                "alternateName": "VProger",
+                "url": "https://vproger.ru"
+            },
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "RUB"
+            }
+        }
+    </script>
+
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Pomodoro Pro",
+            "url": "https://pomidoro.vproger.ru/",
+            "inLanguage": "ru-RU"
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Pomodoro Pro",
+            "url": "https://pomidoro.vproger.ru/",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://pomidoro.vproger.ru/?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            },
+            "inLanguage": "ru-RU"
+        }
+    </script>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
@@ -56,41 +142,7 @@
 </head>
 
 <body class="min-h-screen flex flex-col">
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Андрей Викулов",
-        "alternateName": "VProger",
-        "jobTitle": "Full-Stack Developer",
-        "url": "https://vproger.ru",
-        "sameAs": [
-            "https://github.com/va-proger",
-            "https://vk.com/vproger_club",
-            "https://t.me/vproger"
-        ]
-    }
-</script>
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Главная",
-                "item": "https://vproger.github.io/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Pomodoro Pro",
-                "item": "https://vproger.github.io/pomodoro-pro/"
-            }
-        ]
-    }
-</script>
+
 
 <header class="w-full max-w-4xl mx-auto px-4 pt-5 flex items-center justify-between gap-4">
     <div>

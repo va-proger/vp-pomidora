@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pomidoro.vproger.ru/sitemap.xml
+Host: pomidoro.vproger.ru
